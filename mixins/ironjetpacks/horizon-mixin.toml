@@ -1,0 +1,138 @@
+[mod]
+id = "ironjetpacks"
+version = "0.1.0"
+priority = 100
+
+[compatibility]
+horizon_revision = "1d63e0a5a37a7a708eb0b32b49bf0dfeb28ed8a9"
+
+# The pure flight model (standalone crate lib, injected as
+# `crate::game::ironjetpacks`).
+[[module]]
+id = "runtime"
+file = "crates/horizon-client/src/game.rs"
+name = "ironjetpacks"
+source = "runtime.rs"
+
+# Game-side glue: the held jump key, per-player fuel and the velocity write.
+[[module]]
+id = "state"
+file = "crates/horizon-client/src/game.rs"
+name = "ironjetpacks_state"
+source = "support.rs"
+
+# The content half is inside this bundle (`data/ironjetpacks-content.hmod`, the built
+# `content/ironjetpacks.hmod`): this writes it to `.horizon-cache/` and appends it to the
+# dev-mod list, so one `.hnmod` installs the jetpack item and the code. The registry keeps one
+# file per project, so a split port could not be listed; AE2 ships the same pattern.
+[[injection]]
+id = "embedded-content"
+kind = "HEAD"
+cancellable = true
+target = "horizon_client::game::mods::content_root"
+helper = "embedded_content.rs"
+bindings = [
+  { name = "root", ty = "&std::path::Path", value = "root" },
+  { name = "enabled", ty = "&std::collections::BTreeSet<String>", value = "enabled" },
+  { name = "dev", ty = "&[std::path::PathBuf]", value = "dev" },
+]
+
+# The window's tick: the local player's raw Space key. The server tick of the
+# player does not see the host's held keys (they are swapped out), so the key
+# is sampled here and read in `player_tick`.
+[[injection]]
+id = "tick"
+hook = "tick"
+hook_version = 1
+kind = "HEAD"
+helper = "tick.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+]
+
+# A player's server tick end: thrust when the jetpack is worn and jump is held.
+[[injection]]
+id = "player-tick"
+hook = "player_tick"
+hook_version = 1
+kind = "HEAD"
+helper = "player_tick.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+]
+
+# Declare `/ironjetpacks fuel [amount]`, the slice's configurable fuel control.
+[[injection]]
+id = "register-commands"
+hook = "register_commands"
+hook_version = 1
+kind = "HEAD"
+helper = "register.rs"
+bindings = [
+  { name = "commands", ty = "&mut Vec<NativeCommand>", value = "commands" },
+]
+
+# Run `/ironjetpacks fuel` when a player types it.
+[[injection]]
+id = "perform-command"
+hook = "perform_command"
+hook_version = 1
+kind = "HEAD"
+helper = "perform.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+  { name = "player", ty = "&NativeServerPlayer", value = "player" },
+  { name = "command", ty = "&str", value = "command" },
+  { name = "ran", ty = "&mut bool", value = "ran" },
+]
+
+# The jetpack item is a battery of its tier's capacity (`Capabilities.
+# Energy.ITEM`, API 307); the energy lives in the stack's custom data.
+[[injection]]
+id = "item-energy-buffer"
+hook = "item_energy_buffer"
+hook_version = 1
+kind = "HEAD"
+helper = "energy_buffer.rs"
+bindings = [
+  { name = "item", ty = "&str", value = "item" },
+  { name = "buffer", ty = "&mut Option<horizon_client::mod_api::ItemEnergyBuffer>", value = "buffer" },
+]
+
+# Register the mod's engine switch (upstream `JETPACK_ENGINE`) before content
+# loads (API 65).
+[[injection]]
+id = "component-types"
+hook = "component_types"
+hook_version = 1
+kind = "HEAD"
+helper = "component_types.rs"
+bindings = [
+  { name = "types", ty = "&mut Vec<String>", value = "types" },
+]
+
+# The client chat box knows `/ironjetpacks`, so the command is listed and
+# completed there (API 35).
+[[injection]]
+id = "commands"
+hook = "commands"
+hook_version = 1
+kind = "HEAD"
+helper = "commands.rs"
+bindings = [
+  { name = "commands", ty = "&mut Vec<&'static str>", value = "commands" },
+]
+
+# A guest's own input flags, so their ascend/descend/sprint keys drive the
+# flight model (API 343). The host sends none and keeps the window sample.
+[[injection]]
+id = "player-input"
+hook = "player_input"
+hook_version = 1
+kind = "HEAD"
+helper = "player_input.rs"
+bindings = [
+  { name = "player", ty = "u128", value = "player" },
+  { name = "name", ty = "&str", value = "name" },
+  { name = "flags", ty = "i32", value = "flags" },
+]

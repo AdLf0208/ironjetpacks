@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "ironjetpacks:item/cell",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 14200760
+      }
+    ]
+  }
+}

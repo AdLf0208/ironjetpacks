@@ -1,0 +1,16 @@
+{
+  "template": "minecraft:leather_chestplate",
+  "max_stack_size": 1,
+  "components": {
+    "minecraft:max_damage": 1000000,
+    "minecraft:equippable": {
+      "slot": "chest",
+      "asset_id": "ironjetpacks:jetpack",
+      "damage_on_hurt": false,
+      "swappable": true,
+      "dispensable": true
+    },
+    "!minecraft:repairable": {},
+    "!minecraft:enchantable": {}
+  }
+}

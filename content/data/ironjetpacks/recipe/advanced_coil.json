@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": "minecraft:gold_ingot",
+    "R": "minecraft:redstone",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    " DR",
+    "DSD",
+    "RD "
+  ],
+  "result": {
+    "count": 1,
+    "id": "ironjetpacks:advanced_coil"
+  }
+}

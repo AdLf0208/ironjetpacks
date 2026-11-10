@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": "ironjetpacks:cell",
+    "M": "minecraft:iron_ingot"
+  },
+  "pattern": [
+    "MEM",
+    "MEM",
+    "MEM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ironjetpacks:capacitor"
+  }
+}
