@@ -1,0 +1,18 @@
+[package]
+# Ported from: Iron Jetpacks 8.0.11 (BlakeBr0/IronJetpacks, MIT) for Minecraft
+# Java 1.21.1 NeoForge; behaviour and content read from the 26.1 branch. LOCAL-
+# ONLY until the maintainer approves publishing (ARCHITECTURE.md §8).
+name = "horizon-ironjetpacks"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.95"
+license = "MIT"
+description = "Iron Jetpacks for Horizon: one tier's powered vertical flight"
+
+[lib]
+# This exact source is also injected as a same-crate module by horizon-mixins.
+path = "mixins/ironjetpacks/runtime.rs"
+
+[workspace]
+members = ["tools/audit"]
+resolver = "2"

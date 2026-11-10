@@ -1,0 +1,15 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "ironjetpacks:jetpack",
+        "dyeable": {
+          "color_when_undyed": 14200760
+        }
+      },
+      {
+        "texture": "ironjetpacks:jetpack_overlay"
+      }
+    ]
+  }
+}

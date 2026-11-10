@@ -1,0 +1,11 @@
+# Port-owned content mod for the carried Iron Jetpacks iron tier: the jetpack
+# and the component items, with their MIT upstream models, textures, lang and
+# the iron-tier recipe chain. Built from the 26.1 branch's own assets
+# (BlakeBr0/IronJetpacks); the flight behaviour lives in the native bundle in
+# ../. LOCAL-ONLY until the maintainer approves publishing (ARCHITECTURE.md §8).
+id = "ironjetpacks"
+name = "Iron Jetpacks"
+version = "8.0.11"
+api = "0.2"
+side = "both"
+capabilities = ["registries"]

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "ironjetpacks:advanced_coil",
+    "E": "ironjetpacks:cell",
+    "F": "minecraft:furnace",
+    "M": "minecraft:iron_ingot"
+  },
+  "pattern": [
+    "MCM",
+    "CEC",
+    "MFM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ironjetpacks:thruster"
+  }
+}

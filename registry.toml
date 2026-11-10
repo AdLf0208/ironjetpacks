@@ -1,0 +1,49 @@
+id = "ironjetpacks"
+kind = "native-mod"
+name = "ironjetpacks"
+summary = "A Horizon port of ironjetpacks."
+description = """
+A port of [ironjetpacks](BlakeBr0/IronJetpacks) for Horizon.
+
+**Implemented so far**
+
+- Item** `ironjetpacks:jetpack`, the 26.1 single jetpack item fixed to the
+- iron tier. It is a chest item (right-click equips it), unbreakable, stacks
+- to 1, armor 3, and uses the upstream item model/texture and worn equipment
+- Flight**: while the jetpack is in the chest slot and the jump key is
+- held, the player rises. The vertical velocity is
+- `min(motionY + accel, speedVert) * throttle * sprint` with the upstream
+- acceleration/cap/water/sprint rules. The thrust ticks also zero the fall
+- distance.
+
+**Not yet ported**
+
+- One item, one tier.** 26.1 uses one `jetpack` item with a `jetpack_id`
+- component and a synced registry of 14 tiers; the pin's content format
+- cannot register that component, so the port ships the iron tier only and
+- the item id itself is the tier. The creative tab lists only the iron-tier
+- components (one advanced coil, one cell/thruster/capacitor).
+- No HUD / item bar for the item-backed tank.** Slice 2 stores FE in the
+- stack's own `minecraft:custom_data` (`horizon_energy`) and the commands
+- report/set it, so it survives with the item; the pin's `item_bar` (API 307)
+
+Original copyright and licence notices are kept in this repository. Pinned to
+Horizon 1d63e0a and horizon-mixins 5a64af93. Help with the remaining slices is
+welcome.
+"""
+authors = ["AdLf0208"]
+owners = ["AdLf0208"]
+owner_ids = [107615167]
+license = "MIT"
+source = "https://github.com/AdLf0208/ironjetpacks"
+icon = "icons/ironjetpacks.png"
+categories = ["utility"]
+tags = ["port", "horizon"]
+
+[[versions]]
+version = "0.1.0"
+published = "2026-11-10"
+game = "26.3"
+file = "ironjetpacks.hnmod"
+sha256 = "7fedd33d9f96de8c61b6b1b2f9bcc3d218481e07ab5d8c59861b77ac3ed94691"
+changelog = "First release"

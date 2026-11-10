@@ -1,0 +1,12 @@
+{
+  "title": "itemGroup.ironjetpacks",
+  "icon": "ironjetpacks:jetpack",
+  "items": [
+    "ironjetpacks:strap",
+    "ironjetpacks:advanced_coil",
+    "ironjetpacks:cell",
+    "ironjetpacks:thruster",
+    "ironjetpacks:capacitor",
+    "ironjetpacks:jetpack"
+  ]
+}
